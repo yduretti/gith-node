@@ -1,0 +1,23 @@
+name: CICD data_pipeline:
+  
+on:
+  pull_request: 
+    branch: [main]
+
+  jobs:
+    build: 
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout code 
+          uses: actions/checkout@v3
+
+        - name: Setup node
+          uses: actions/setup-node@v3
+          with:
+            node-version: '14'
+
+        - name: Setup depedencies
+          run: npm install
+
+        - name: Linter (ESLint)
+          run: npm run lint
